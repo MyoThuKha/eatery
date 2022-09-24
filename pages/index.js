@@ -52,10 +52,11 @@ export default function Home({ data }) {
             {recipes.map((item) => (
               <div key={item.id} className="card hover:shadow-lg">
                 <Image
+                  className=" object-cover "
                   src={item.image}
                   alt={item.title}
-                  width={200}
-                  height={150}
+                  width={195}
+                  height={180}
                   layout="responsive"
                 />
 
