@@ -1,55 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
-import NavBar from "../components/navBar";
+import { useState } from "react";
+import LogIn from "../components/login";
 
 export const getStaticProps = async () => {
-  const res = await fetch(
-    "https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96"
-  );
+  const url =
+    "https://api.spoonacular.com/recipes/complexSearch?query=drink&maxFat=25&number=36&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96";
+  const res = await fetch(url);
   const data = await res.json();
+  console.log(data);
   return {
     props: { data },
   };
 };
 export default function Home({ data }) {
   const recipes = data.results;
+  const [load, setLoad] = useState(3);
+  console.log(recipes);
+
   return (
-    <div className="md:grid md:grid-cols-5">
-      <div className="md:col-span-1 flex justify-end">
-        <NavBar />
-      </div>
+    <main>
+      <LogIn />
+      <header>
+        <h2 className="text-gray-700 text-6xl font-bold font-body">Recipes</h2>
+        <h3 className="text-gray-700 text-2xl font-semi-bold">For Ninjas</h3>
+      </header>
 
-      <main className="px-16 py-16 bg-gray-100 col-span-4">
-        <div className="flex justify-center md:justify-end">
-          <a
-            href="#"
-            className="btn md:border-2 text-red-400 border-red-400 mx-2 hover:text-white hover:bg-red-400 transition ease-out duration-500"
-          >
-            Log in
-          </a>
-          <a
-            href="#"
-            className="btn md:border-2 text-red-400 border-red-400 hover:text-white hover:bg-red-400 transition ease-out duration-500"
-          >
-            Sign up
-          </a>
-        </div>
+      <div>
+        <h4 className="font-bold mt-12 pb-2 border-b border-gray-200">
+          Latest Recipes
+        </h4>
 
-        <header>
-          <h2 className="text-gray-700 text-6xl font-bold font-body">
-            Recipes
-          </h2>
-          <h3 className="text-gray-700 text-2xl font-semi-bold">For Ninjas</h3>
-        </header>
-
-        <div>
-          <h4 className="font-bold mt-12 pb-2 border-b border-gray-200">
-            Latest Recipes
-          </h4>
-
-          <div className="grid lg:grid-cols-3 lg:gap-10">
-            {/*  cards go here  */}
-            {recipes.map((item) => (
+        <div className="grid lg:grid-cols-3 lg:gap-10">
+          {/*  cards go here  */}
+          {recipes === undefined ? (
+            <div>Can&apos;t fetch data at the moment...</div>
+          ) : (
+            recipes.slice(0, load).map((item) => (
               <div key={item.id} className="card hover:shadow-lg">
                 <Image
                   className=" object-cover "
@@ -57,6 +44,7 @@ export default function Home({ data }) {
                   alt={item.title}
                   width={195}
                   height={180}
+                  priority={true}
                   layout="responsive"
                 />
 
@@ -80,26 +68,31 @@ export default function Home({ data }) {
                         d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span>25 mins</span>
+                    <span>{item.nutrition.nutrients[0].name}</span>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <h4 className="font-bold mt-12 pb-2 border-b border-gray-200">
-            Most Popular
-          </h4>
-
-          <div className="mt-8">{/* cards go here  */}</div>
+            ))
+          )}
         </div>
 
-        <div className="flex justify-center">
-          <div className="btn bg-stone-400 text-white hover:shadow-inner transform hover:scale-125 hover:bg-opacity-50">
+        <h4 className="font-bold mt-12 pb-2 border-b border-gray-200">
+          Most Popular
+        </h4>
+
+        <div className="mt-8">{/* cards go here  */}</div>
+      </div>
+
+      {load != 39 && (
+        <div className="flex justify-center ">
+          <div
+            className="btn bg-stone-400 text-white hover:shadow-inner transform hover:scale-125 hover:bg-opacity-50"
+            onClick={() => setLoad(() => load + 9)}
+          >
             Load more
           </div>
         </div>
-      </main>
-    </div>
+      )}
+    </main>
   );
 }
