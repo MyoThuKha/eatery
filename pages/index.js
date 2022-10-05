@@ -2,13 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import LogIn from "../components/login";
+import { foods_api } from "../components/data";
 
 export const getStaticProps = async () => {
-  const url =
-    "https://api.spoonacular.com/recipes/complexSearch?query=drink&maxFat=25&number=36&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96";
+  const url = foods_api;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
   return {
     props: { data },
   };
@@ -16,14 +15,13 @@ export const getStaticProps = async () => {
 export default function Home({ data }) {
   const recipes = data.results;
   const [load, setLoad] = useState(3);
-  console.log(recipes);
 
   return (
     <main>
       <LogIn />
       <header>
         <h2 className="text-gray-700 text-6xl font-bold font-body">Recipes</h2>
-        <h3 className="text-gray-700 text-2xl font-semi-bold">For Ninjas</h3>
+        <h3 className="text-gray-700 text-2xl font-semi-bold">For Beginners</h3>
       </header>
 
       <div>
@@ -37,41 +35,43 @@ export default function Home({ data }) {
             <div>Can&apos;t fetch data at the moment...</div>
           ) : (
             recipes.slice(0, load).map((item) => (
-              <div key={item.id} className="card hover:shadow-lg">
-                <Image
-                  className=" object-cover "
-                  src={item.image}
-                  alt={item.title}
-                  width={195}
-                  height={180}
-                  priority={true}
-                  layout="responsive"
-                />
+              <Link key={item.id} href={`/details/${item.id}`}>
+                <div className="card hover:shadow-lg">
+                  <Image
+                    className=" object-cover "
+                    src={item.image}
+                    alt={item.title}
+                    width={195}
+                    height={180}
+                    priority={true}
+                    layout="responsive"
+                  />
 
-                <div className="m-4">
-                  <span className="text-xl font-bold">{item.title}</span>
-                  {/* <span className="block justify-center text-sm text-gray-400">
+                  <div className="m-4">
+                    <span className="text-xl font-bold">{item.title}</span>
+                    {/* <span className="block justify-center text-sm text-gray-400">
                     Recipe by Mario
                   </span> */}
-                  <div className="badge">
-                    <svg
-                      className="w-5 inline-block"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="{1.5}"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>{item.nutrition.nutrients[0].name}</span>
+                    <div className="badge">
+                      <svg
+                        className="w-5 inline-block"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="{1.5}"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>{item.nutrition.nutrients[0].name}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           )}
         </div>
