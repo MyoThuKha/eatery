@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import LogIn from "../components/login";
-import { foods_api } from "../components/data";
+import { foods_api } from "../data/data";
+import { dummyMenu } from "../data/dummyMenu";
 
 export const getStaticProps = async () => {
   const url = foods_api;
-  const res = await fetch(url);
-  const data = await res.json();
+  const data = dummyMenu;
+  // const res = await fetch(url);
+  // const data = await res.json();
   return {
     props: { data },
   };
@@ -35,7 +37,7 @@ export default function Home({ data }) {
             <div>Can&apos;t fetch data at the moment...</div>
           ) : (
             recipes.slice(0, load).map((item) => (
-              <Link key={item.id} href={`/details/${item.id}`}>
+              <Link key={item.id} href={`/recipes/${item.id}`}>
                 <div className="card hover:shadow-lg">
                   <Image
                     className=" object-cover "
