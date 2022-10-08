@@ -12,6 +12,7 @@ const NavBar = () => {
   return (
     <nav className="flex justify-center">
       {/* title */}
+
       <div>
         <h1 className="font-bold uppercase p-3 border-b border-gray-100">
           <Link href="/">Food Ninja</Link>

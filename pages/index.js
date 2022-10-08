@@ -19,7 +19,7 @@ export default function Home({ data }) {
   const [load, setLoad] = useState(3);
 
   return (
-    <main>
+    <main className="px-16 py-16">
       <LogIn />
       <header>
         <h2 className="text-gray-700 text-6xl font-bold font-body">Recipes</h2>
