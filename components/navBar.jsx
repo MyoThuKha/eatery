@@ -1,21 +1,23 @@
 import Link from "next/link";
-import { Children, useState } from "react";
+import { useState } from "react";
 const NavBar = () => {
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState("breakfast");
 
-  const NavItem = ({ current, id, children }) => {
-    if (current === id) {
-      return <li className="activeNav">{children}</li>;
-    }
-    return <li className="otherNav">{children}</li>;
+  const Category = ({ current, children }) => {
+    let style = "otherNav";
+    if (current === children) style = "activeNav";
+    return (
+      <li className={style} onClick={() => setActive(children)}>
+        {children}
+      </li>
+    );
   };
   return (
-    <nav className="flex justify-center">
+    <nav>
       {/* title */}
-
-      <div>
+      <div className="flex justify-center">
         <h1 className="font-bold uppercase p-3 border-b border-gray-100">
-          <Link href="/">Food Ninja</Link>
+          <Link href="/">Food Categories</Link>
         </h1>
         <svg
           className="w-6 h-6 hover:cursor-pointer md:hidden"
@@ -34,9 +36,27 @@ const NavBar = () => {
         </svg>
       </div>
 
-      <ul className="hidden md:block md:mr-1 mt-2" id="menu-items"></ul>
+      <div className="flex justify-center h-full">
+        <ul className="md:mr-1 mt-2 items-around capitalize">
+          <Category current={active}>breakfast</Category>
+          <Category current={active}>dessert</Category>
+          <Category current={active}>snack</Category>
+          <Category current={active}>drink</Category>
+          <Category current={active}>beverage</Category>
+        </ul>
+      </div>
     </nav>
   );
+};
+const Category = ({ current, children }) => {
+  if (current === children) {
+    return (
+      <li className="activeNav" onClick={setCurrent}>
+        {children}
+      </li>
+    );
+  }
+  return <li className="otherNav">{children}</li>;
 };
 
 export default NavBar;

@@ -15,9 +15,16 @@
 }
 
 .activeNav {
-  @apply py-1 border-r-4 border-red-400 rounded-lg shadow-md cursor-pointer;
+  /* @apply py-1 border-r-4 border-red-400 rounded-lg shadow-md cursor-pointer; */
+  @apply cursor-pointer text-xl;
 }
 
 .otherNav {
-  @apply py-1 border-r-4 border-white cursor-pointer;
+  /* @apply py-1 border-r-4 border-white cursor-pointer; */
+  @apply cursor-pointer;
+}
+
+.divider {
+  color: #9e9276;
+  background-color: #9e9276;
 }

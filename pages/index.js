@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import LogIn from "../components/login";
 import { foods_api } from "../data/data";
 import { dummyMenu } from "../data/dummyMenu";
 
@@ -20,7 +19,7 @@ export default function Home({ data }) {
 
   return (
     <main className="px-16 py-16">
-      <LogIn />
+      {/* <LogIn /> */}
       <header>
         <h2 className="text-gray-700 text-6xl font-bold font-body">Recipes</h2>
         <h3 className="text-gray-700 text-2xl font-semi-bold">For Beginners</h3>
@@ -78,18 +77,18 @@ export default function Home({ data }) {
           )}
         </div>
 
-        <h4 className="font-bold mt-12 pb-2 border-b border-gray-200">
+        {/* <h4 className="font-bold mt-12 pb-2 border-b border-gray-200">
           Most Popular
-        </h4>
+        </h4> */}
 
         <div className="mt-8">{/* cards go here  */}</div>
       </div>
 
-      {load != 39 && (
+      {load != 15 && (
         <div className="flex justify-center ">
           <div
             className="btn bg-stone-400 text-white hover:shadow-inner transform hover:scale-125 hover:bg-opacity-50"
-            onClick={() => setLoad(() => load + 9)}
+            onClick={() => setLoad(() => load + 6)}
           >
             Load more
           </div>
