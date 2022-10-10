@@ -1,19 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { foods_api } from "../data/data";
 import { dummyMenu } from "../data/dummyMenu";
 import NavBar from "../components/navBar";
 
 export const getStaticProps = async () => {
+  const foods_api =
+    "https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96";
   const url = foods_api;
-  const data = dummyMenu;
-  // const res = await fetch(url);
-  // const data = await res.json();
+  // const data = dummyMenu;
+  const res = await fetch(url);
+  const data = await res.json();
   return {
     props: { data },
   };
 };
+
 export default function Home({ data }) {
   const recipes = data.results;
   const [load, setLoad] = useState(3);
@@ -45,7 +47,14 @@ export default function Home({ data }) {
               <div>Can&apos;t fetch data at the moment...</div>
             ) : (
               recipes.slice(0, load).map((item) => (
-                <Link key={item.id} href={`/recipes/${item.id}`}>
+                <Link
+                  key={item.id}
+                  href={{
+                    pathname: `/recipes/${item.id}`,
+                    query: { text: "hello" },
+                  }}
+                  as={`/recipes/${item.id}`}
+                >
                   <div className="card hover:shadow-lg">
                     <Image
                       className=" object-cover "
@@ -77,7 +86,7 @@ export default function Home({ data }) {
                             d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
                           />
                         </svg>
-                        <span>{item.nutrition.nutrients[0].name}</span>
+                        {/* <span>{item.nutrition.nutrients[0].name}</span> */}
                       </div>
                     </div>
                   </div>

@@ -1,13 +1,13 @@
 import Image from "next/image";
-// import { foods_api, info } from "../../data/data";
-import { dummyInfo } from "../../data/dummyInfo";
-import { dummyMenu } from "../../data/dummyMenu";
+import { useEffect, useMemo } from "react";
 import NavBar2 from "../../components/navBar2";
 
 export const getStaticPaths = async () => {
-  // const res = await fetch(foods_api);
-  // const data = await res.json();
-  const data = dummyMenu;
+  const foods_api =
+    "https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96";
+  const res = await fetch(foods_api);
+  const data = await res.json();
+  // const data = dummyMenu;
   const paths = data.results.map((each) => {
     return {
       params: {
@@ -23,10 +23,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const data = dummyInfo;
-  // const res = await fetch(info(id));
-  // const data = await res.json();
-  console.log(data);
+  const api = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96`;
+  const res = await fetch(api);
+  const data = await res.json();
   return {
     props: { data },
   };
@@ -35,9 +34,10 @@ export const getStaticProps = async (context) => {
 const Details = ({ data }) => {
   const imageUrl = data.image;
   const title = data.title;
-  console.log(data.analyzedInstructions);
   const steps = data.analyzedInstructions[0].steps;
-  // const instructions = data.instructions;
+
+  // console.log(ingredients);
+
   return (
     <div className="md:grid md:grid-cols-5">
       <nav className="md:col-span-1 flex justify-center bg-white">
