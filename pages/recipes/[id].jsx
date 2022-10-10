@@ -2,6 +2,7 @@ import Image from "next/image";
 // import { foods_api, info } from "../../data/data";
 import { dummyInfo } from "../../data/dummyInfo";
 import { dummyMenu } from "../../data/dummyMenu";
+import NavBar2 from "../../components/navBar2";
 
 export const getStaticPaths = async () => {
   // const res = await fetch(foods_api);
@@ -38,39 +39,42 @@ const Details = ({ data }) => {
   const steps = data.analyzedInstructions[0].steps;
   // const instructions = data.instructions;
   return (
-    <div>
-      <section className="pb-5 border-b border-orange-900">
-        <div className="flex justify-center">
-          {/* <div className="w-full h-64 overflow-hidden bg-purple-600"> */}
-          <Image
-            src={imageUrl}
-            alt="main image"
-            width={400}
-            height={400}
-            // layout="responsive"
-            className="rounded-full"
-          />
-        </div>
-        <div className="text-6xl text-center font-bold my-6">{title}</div>
-      </section>
-      <section className="py-5 border-b border-orange-900">
-        <h1 className="text-4xl text-center my-6">Ingredients</h1>
-        <div className="flex justify-center">
-          <ul className="text-center">
-            {steps.map((each) => {
-              return each.ingredients.map((each) => {
-                return (
-                  <li key={each.id} className="capitalize">
-                    {each.name}
-                  </li>
-                );
-              });
-            })}
-          </ul>
-        </div>
-      </section>
-      <section className="py-5 border-b border-orange-900">
-        <div>
+    <div className="md:grid md:grid-cols-5">
+      <nav className="md:col-span-1 flex justify-center bg-white">
+        <NavBar2 />
+      </nav>
+      <div className="px-16 py-16 col-span-4">
+        <section id="name" className="pb-5 border-b border-orange-900">
+          <div className="flex justify-center">
+            {/* <div className="w-full h-64 overflow-hidden bg-purple-600"> */}
+            <Image
+              src={imageUrl}
+              alt="main image"
+              width={400}
+              height={400}
+              // layout="responsive"
+              className="rounded-full"
+            />
+          </div>
+          <div className="text-6xl text-center font-bold my-6">{title}</div>
+        </section>
+        <section id="ingredients" className="py-5 border-b border-orange-900">
+          <h1 className="text-4xl text-center my-6">Ingredients</h1>
+          <div className="flex justify-center">
+            <ul className="text-center">
+              {steps.map((each) => {
+                return each.ingredients.map((each) => {
+                  return (
+                    <li key={each.id} className="capitalize">
+                      {each.name}
+                    </li>
+                  );
+                });
+              })}
+            </ul>
+          </div>
+        </section>
+        <section id="directions" className="py-5 border-b border-orange-900">
           <h1 className="text-4xl text-center my-6">Directions</h1>
           <div className="flex justify-center">
             <div className="w-8/12 text-center">
@@ -79,8 +83,8 @@ const Details = ({ data }) => {
               })}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };
