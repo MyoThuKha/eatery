@@ -5,8 +5,7 @@ import { dummyMenu } from "../data/dummyMenu";
 import NavBar from "../components/navBar";
 
 export const getStaticProps = async () => {
-  const foods_api =
-    "https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96";
+  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=${process.env.API_KEY}`;
   const url = foods_api;
   // const data = dummyMenu;
   const res = await fetch(url);
@@ -17,6 +16,7 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ data }) {
+  // data = dummyMenu
   const recipes = data.results;
   const [load, setLoad] = useState(3);
 

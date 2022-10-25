@@ -3,8 +3,7 @@ import { useEffect, useMemo } from "react";
 import NavBar2 from "../../components/navBar2";
 
 export const getStaticPaths = async () => {
-  const foods_api =
-    "https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96";
+  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=${process.env.API_KEY}`;
   const res = await fetch(foods_api);
   const data = await res.json();
   // const data = dummyMenu;
@@ -23,7 +22,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const api = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=8a61ec6fd5a54af6a0803c76b46e1a96`;
+  const api = `https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=${process.env.API_KEY}`;
   const res = await fetch(api);
   const data = await res.json();
   return {
