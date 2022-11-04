@@ -27,3 +27,8 @@ body {
 .imageBorder {
   border: 1.5px solid #000;
 }
+
+.btn {
+  border: 1.5px solid #000;
+  @apply rounded-full block py-2 w-full font-semibold;
+}

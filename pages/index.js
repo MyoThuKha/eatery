@@ -30,6 +30,18 @@ export default function Home({ data }) {
               <br />
               Recipes
             </h1>
+            <div>
+              <h1>Ingredients</h1>
+              <div>
+                <div>
+                  <ul>
+                    {recipes.map((each) => (
+                      <li key={each.id}></li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
           <div className=" col-span-3">
             {/* section 2 */}
@@ -56,7 +68,12 @@ export default function Home({ data }) {
             </div>
             {/* section3 */}
             <div className="bottomSection grid grid-cols-2">
-              <div className="col-span-1 border-r border-black">coo</div>
+              <div className="col-span-1 border-r border-black flex flex-col justify-around px-10">
+                <button className="btn">Steaks</button>
+                <button className="btn">Drinks</button>
+                <button className="btn">Drinks</button>
+                <button className="btn">Drinks</button>
+              </div>
               <div className="col-span-1 font-bold text-center">
                 <p className="text-6xl">*</p>
                 <p className="text-3xl">+{recipes.length}</p>
