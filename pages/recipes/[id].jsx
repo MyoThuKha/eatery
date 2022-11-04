@@ -37,6 +37,17 @@ const Details = ({ data }) => {
 
   // console.log(ingredients);
 
+  {
+    /* <div className="rounded-full border-2 inline-block p-3">
+          <Image
+            className=" rounded-full"
+            src={recipes[0].image}
+            alt="food"
+            width={200}
+            height={200}
+          />
+        </div> */
+  }
   return (
     <div className="md:grid md:grid-cols-5">
       <nav className="md:col-span-1 flex justify-center bg-white">
