@@ -23,3 +23,7 @@ body {
 .bottomSection {
   height: calc((100vh - 101px) / 2);
 }
+
+.imageBorder {
+  border: 1.5px solid #000;
+}

@@ -17,7 +17,7 @@ export const getStaticProps = async () => {
 
 export default function Home({ data }) {
   const recipes = data.results;
-  const [load, setLoad] = useState(3);
+  const [curr, setCurr] = useState();
 
   return (
     <div className="">
@@ -32,12 +32,34 @@ export default function Home({ data }) {
             </h1>
           </div>
           <div className=" col-span-3">
-            <div className="topSection"></div>
+            {/* section 2 */}
+            <div className="topSection overflow-scroll">
+              {recipes.map((each) => {
+                return (
+                  <div
+                    key={each.id}
+                    className="flex items-center justify-around my-4"
+                  >
+                    <p className="w-1/2 text-white text-lg">{each.title}</p>
+                    <div className="imageBorder inline-flex my-2">
+                      <Image
+                        src={each.image}
+                        alt={each.title}
+                        width={150}
+                        height={80}
+                        objectFit="cover"
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {/* section3 */}
             <div className="bottomSection grid grid-cols-2">
               <div className="col-span-1 border-r border-black">coo</div>
               <div className="col-span-1 font-bold text-center">
                 <p className="text-6xl">*</p>
-                <p className="text-3xl">+500</p>
+                <p className="text-3xl">+{recipes.length}</p>
                 <p className="text-2xl">Food Recipes</p>
                 <p>All Around the world</p>
               </div>
