@@ -7,9 +7,8 @@ import ChoosenItem from "../components/choosen";
 
 export const getStaticProps = async () => {
   const foods_api = `https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=${process.env.API_KEY}`;
-  const url = foods_api;
   const data = dummyMenu;
-  // const res = await fetch(url);
+  // const res = await fetch(foods_api);
   // const data = await res.json();
   return {
     props: { data },
@@ -19,10 +18,9 @@ export const getStaticProps = async () => {
 export default function Home({ data }) {
   const recipes = data.results;
   const [curr, setCurr] = useState(0);
-  console.log(curr);
 
   return (
-    <div className="">
+    <div>
       <NavBar></NavBar>
       <main className="">
         <div className="grid grid-cols-7">

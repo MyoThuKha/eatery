@@ -3,11 +3,15 @@ import Image from "next/image";
 const ChoosenItem = ({ dish }) => {
   const ingredients = useMemo(() => {
     let result = [];
-    dish.analyzedInstructions[0].steps.map((step) => {
-      step.ingredients.map((each) => {
-        result.push(each.name);
+    try {
+      dish.analyzedInstructions[0].steps.map((step) => {
+        step.ingredients.map((each) => {
+          result.push(each.name);
+        });
       });
-    });
+    } catch (e) {
+      result.push("no data");
+    }
     //removing duplicate items
     result = [...new Set(result)];
     return result;
@@ -17,14 +21,16 @@ const ChoosenItem = ({ dish }) => {
   return (
     <div className="flex items-center justify-center">
       <div className="bgImage flex justify-center items-center">
-        <div className="relative rounded-full overflow-hidden w-48 h-48">
-          <Image
-            src={dish.image}
-            alt={dish.title}
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
+        <a href={dish.image} target="_blank" rel="noreferrer">
+          <div className="relative rounded-full overflow-hidden w-48 h-48">
+            <Image
+              src={dish.image}
+              alt={dish.title}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+        </a>
       </div>
 
       <div>
