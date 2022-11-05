@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { dummyMenu } from "../data/dummyMenu";
 import NavBar from "../components/navBar";
+import ChoosenItem from "../components/choosen";
 
 export const getStaticProps = async () => {
   const foods_api = `https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=${process.env.API_KEY}`;
@@ -17,7 +18,8 @@ export const getStaticProps = async () => {
 
 export default function Home({ data }) {
   const recipes = data.results;
-  const [curr, setCurr] = useState();
+  const [curr, setCurr] = useState(0);
+  console.log(curr);
 
   return (
     <div className="">
@@ -30,18 +32,7 @@ export default function Home({ data }) {
               <br />
               Recipes
             </h1>
-            <div>
-              <h1>Ingredients</h1>
-              <div>
-                <div>
-                  <ul>
-                    {recipes.map((each) => (
-                      <li key={each.id}></li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <ChoosenItem dish={recipes[curr]} />
           </div>
           <div className=" col-span-3">
             {/* section 2 */}
@@ -53,7 +44,10 @@ export default function Home({ data }) {
                     className="flex items-center justify-around my-4"
                   >
                     <p className="w-1/2 text-white text-lg">{each.title}</p>
-                    <div className="imageBorder inline-flex my-2">
+                    <div
+                      onClick={() => setCurr(recipes.indexOf(each))}
+                      className="customBorder inline-flex my-2"
+                    >
                       <Image
                         src={each.image}
                         alt={each.title}

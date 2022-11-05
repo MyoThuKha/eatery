@@ -24,11 +24,17 @@ body {
   height: calc((100vh - 101px) / 2);
 }
 
-.imageBorder {
+.customBorder {
   border: 1.5px solid #000;
+}
+.ctmBorW {
+  border-width: 1.5px;
 }
 
 .btn {
-  border: 1.5px solid #000;
-  @apply rounded-full block py-2 w-full font-semibold;
+  @apply customBorder rounded-full block py-2 w-full font-semibold;
+}
+
+.listBox {
+  box-shadow: 4px 4px #000;
 }
