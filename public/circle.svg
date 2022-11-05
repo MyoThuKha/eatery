@@ -1,0 +1,17 @@
+<svg
+        width="500.4"
+        height="300"
+        viewBox="0 0 737 500"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="737" height="500" fill="#f2eee9" />
+        <g id="Frame 1">
+          <rect width="737" height="500" fill="#f2eee9" />
+          <g id="Group 1">
+            <circle id="middle" cx="369" cy="250" r="199.5" stroke="black" />
+            <circle id="first" cx="269" cy="250" r="199.5" stroke="black" />
+            <circle id="last" cx="469" cy="250" r="199.5" stroke="black" />
+          </g>
+        </g>
+      </svg>

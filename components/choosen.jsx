@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import Image from "next/image";
 const ChoosenItem = ({ dish }) => {
   const ingredients = useMemo(() => {
     let result = [];
@@ -14,24 +15,17 @@ const ChoosenItem = ({ dish }) => {
   const displayList =
     ingredients.length > 8 ? ingredients.slice(0, 8) : ingredients;
   return (
-    <div className="flex items-center">
-      <svg
-        width="500.4"
-        height="300"
-        viewBox="0 0 737 500"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="737" height="500" fill="#f2eee9" />
-        <g id="Frame 1">
-          <rect width="737" height="500" fill="#f2eee9" />
-          <g id="Group 1">
-            <circle id="middle" cx="369" cy="250" r="199.5" stroke="black" />
-            <circle id="first" cx="269" cy="250" r="199.5" stroke="black" />
-            <circle id="last" cx="469" cy="250" r="199.5" stroke="black" />
-          </g>
-        </g>
-      </svg>
+    <div className="flex items-center justify-center">
+      <div className="bgImage flex justify-center items-center">
+        <div className="relative rounded-full overflow-hidden w-48 h-48">
+          <Image
+            src={dish.image}
+            alt={dish.title}
+            layout="fill"
+            objectFit="cover"
+          />
+        </div>
+      </div>
 
       <div>
         <h1 className="py-2 text-lg">Ingredients</h1>

@@ -46,7 +46,11 @@ export default function Home({ data }) {
                     <p className="w-1/2 text-white text-lg">{each.title}</p>
                     <div
                       onClick={() => setCurr(recipes.indexOf(each))}
-                      className="customBorder inline-flex my-2"
+                      className={
+                        recipes[curr] === each
+                          ? "border-white ctmBorW inline-flex my-2"
+                          : "customBorder inline-flex my-2"
+                      }
                     >
                       <Image
                         src={each.image}
