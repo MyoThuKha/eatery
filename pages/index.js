@@ -19,13 +19,19 @@ export default function Home({ data }) {
   const recipes = data.results;
   const [curr, setCurr] = useState(0);
 
+  const [activeBtn, setActiveBtn] = useState(1);
+  const handleBtn = (curr) => setActiveBtn(curr);
+  const dynamicBtn = (id) => {
+    return activeBtn === id ? "active-btn" : "btn";
+  };
+
   return (
     <div>
       <NavBar></NavBar>
       <main className="">
         <div className="grid grid-cols-7">
           <div className="bodyHeight col-span-4 border-r border-black">
-            <h1 className="text-6xl uppercase">
+            <h1 className="text-8xl uppercase">
               Food
               <br />
               Recipes
@@ -65,10 +71,15 @@ export default function Home({ data }) {
             {/* section3 */}
             <div className="bottomSection grid grid-cols-2">
               <div className="col-span-1 border-r border-black flex flex-col justify-around px-10">
-                <button className="btn">Steaks</button>
-                <button className="btn">Drinks</button>
-                <button className="btn">Drinks</button>
-                <button className="btn">Drinks</button>
+                <button className={dynamicBtn(1)} onClick={() => handleBtn(1)}>
+                  Steaks
+                </button>
+                <button className={dynamicBtn(2)} onClick={() => handleBtn(2)}>
+                  Drinks
+                </button>
+                <button className={dynamicBtn(3)} onClick={() => handleBtn(3)}>
+                  Dessert
+                </button>
               </div>
               <div className="col-span-1 font-bold text-center">
                 <p className="text-6xl">*</p>
