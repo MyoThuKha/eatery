@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import Image from "next/image";
-const ChoosenItem = ({ dish }) => {
+const ChoosenItem = ({ dish, onDetail }) => {
   const ingredients = useMemo(() => {
     let result = [];
     try {
@@ -43,7 +43,10 @@ const ChoosenItem = ({ dish }) => {
                 <li key={ingredients.indexOf(each)}>{each}</li>
               ))}
             </ul>
-            <button className="py-4 absolute bottom-2 text-orange-300 underline">
+            <button
+              onClick={() => onDetail()}
+              className="py-4 absolute bottom-2 text-orange-300 underline"
+            >
               See More
             </button>
           </div>
