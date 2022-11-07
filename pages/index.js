@@ -1,12 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import { dummyMenu } from "../data/dummyMenu";
 import NavBar from "../components/navBar";
 import ChoosenItem from "../components/choosen";
 
 export const getStaticProps = async () => {
-  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?number=12&apiKey=${process.env.API_KEY}`;
+  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=20&apiKey=${process.env.API_KEY}`;
   const data = dummyMenu;
   // const res = await fetch(foods_api);
   // const data = await res.json();
@@ -16,13 +15,32 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ data }) {
-  const recipes = data.results;
+  const [recipes, setRecipes] = useState(data.results);
   const [curr, setCurr] = useState(0);
 
   const [activeBtn, setActiveBtn] = useState(1);
-  const handleBtn = (curr) => setActiveBtn(curr);
   const dynamicBtn = (id) => {
     return activeBtn === id ? "active-btn" : "btn";
+  };
+
+  const handleBtn = (id) => {
+    setActiveBtn(id);
+    changeRecipes(id);
+  };
+
+  const changeRecipes = (id) => {
+    let result;
+    if (id === 1) result = data.results;
+    if (id === 2)
+      result = data.results.filter((each) => each.veryPopular === true);
+    if (id === 3)
+      result = data.results.filter(
+        (each) => each.dishTypes.includes("dinner") === true
+      );
+    if (id === 4)
+      result = data.results.filter((each) => each.vegetarian === true);
+    setCurr(0);
+    setRecipes(result);
   };
 
   return (
@@ -72,18 +90,21 @@ export default function Home({ data }) {
             <div className="bottomSection grid grid-cols-2">
               <div className="col-span-1 border-r border-black flex flex-col justify-around px-10">
                 <button className={dynamicBtn(1)} onClick={() => handleBtn(1)}>
-                  Steaks
+                  All
                 </button>
                 <button className={dynamicBtn(2)} onClick={() => handleBtn(2)}>
-                  Drinks
+                  Popular
                 </button>
                 <button className={dynamicBtn(3)} onClick={() => handleBtn(3)}>
-                  Dessert
+                  Dinner
+                </button>
+                <button className={dynamicBtn(4)} onClick={() => handleBtn(4)}>
+                  Vegetarian
                 </button>
               </div>
               <div className="col-span-1 font-bold text-center">
                 <p className="text-6xl">*</p>
-                <p className="text-3xl">+{recipes.length}</p>
+                <p className="text-3xl">+{data.results.length}</p>
                 <p className="text-2xl">Food Recipes</p>
                 <p>All Around the world</p>
               </div>
