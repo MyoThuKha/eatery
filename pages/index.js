@@ -17,8 +17,11 @@ export const getStaticProps = async () => {
 export default function Home({ data }) {
   const [recipes, setRecipes] = useState(data.results);
   const [curr, setCurr] = useState(0);
+  const [page, setPage] = useState(1);
+  const changePage = (id) => setPage(id);
 
   const [activeBtn, setActiveBtn] = useState(1);
+
   const dynamicBtn = (id) => {
     return activeBtn === id ? "active-btn" : "btn";
   };
@@ -45,7 +48,7 @@ export default function Home({ data }) {
 
   return (
     <div>
-      <NavBar></NavBar>
+      <NavBar changePage={changePage}></NavBar>
       <main className="">
         <div className="grid grid-cols-7">
           <div className="bodyHeight col-span-4 border-r border-black">
