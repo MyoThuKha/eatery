@@ -10,7 +10,7 @@ body {
 }
 
 .navHeight {
-  height: calc(100vh / 10);
+  height: 10vh;
 }
 .bodyHeight {
   min-height: 100vh;
@@ -19,10 +19,10 @@ body {
 .topSection {
   height: calc((100vh + 101px) / 2);
   background-color: #b3a0cd;
-  @apply border-b border-black;
 }
 .bottomSection {
   height: calc((100vh - 101px) / 2);
+  @apply border-t border-black;
 }
 
 .customBorder {

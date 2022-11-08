@@ -18,7 +18,7 @@ const DetailPage = ({ dish, onDetail }) => {
               key={steps.indexOf(each)}
               className={
                 finished.includes(steps.indexOf(each))
-                  ? "pb-4 cursor-pointer line-through"
+                  ? "pb-4 cursor-pointer line-through decoration-gray-700"
                   : "pb-4 cursor-pointer"
               }
             >
