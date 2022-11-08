@@ -22,7 +22,7 @@ export default function Home({ data }) {
   const [detail, setDetail] = useState(false);
   const changePage = (id) => setPage(id);
 
-  const onDetail = () => setDetail(true);
+  const onDetail = () => setDetail(() => !detail);
 
   const [activeBtn, setActiveBtn] = useState(1);
 
@@ -65,7 +65,7 @@ export default function Home({ data }) {
             />
           </div>
 
-          {detail && <DetailPage dish={recipes[curr]} />}
+          {detail && <DetailPage dish={recipes[curr]} onDetail={onDetail} />}
           {!detail && (
             <div className="col-span-3">
               {/* section 2 */}
