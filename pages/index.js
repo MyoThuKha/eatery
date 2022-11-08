@@ -58,7 +58,11 @@ export default function Home({ data }) {
               <br />
               Recipes
             </h1>
-            <ChoosenItem dish={recipes[curr]} onDetail={onDetail} />
+            <ChoosenItem
+              dish={recipes[curr]}
+              detail={detail}
+              onDetail={onDetail}
+            />
           </div>
 
           {detail && <DetailPage dish={recipes[curr]} />}

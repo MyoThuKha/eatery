@@ -42,6 +42,7 @@ body {
 
 .listBox {
   box-shadow: 4px 4px #000;
+  @apply customBorder relative inline-block w-48 overflow-hidden px-5;
 }
 
 .bgImage {
