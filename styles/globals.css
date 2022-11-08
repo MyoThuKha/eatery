@@ -13,7 +13,7 @@ body {
   height: calc(100vh / 10);
 }
 .bodyHeight {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .topSection {

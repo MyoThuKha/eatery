@@ -60,8 +60,8 @@ export default function Home({ data }) {
             </h1>
             <ChoosenItem dish={recipes[curr]} onDetail={onDetail} />
           </div>
-          {detail && <DetailPage dish={recipes[curr]} />}
 
+          {detail && <DetailPage dish={recipes[curr]} />}
           {!detail && (
             <div className="col-span-3">
               {/* section 2 */}
