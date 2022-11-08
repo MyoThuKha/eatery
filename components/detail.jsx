@@ -11,10 +11,10 @@ const DetailPage = ({ dish, onDetail }) => {
   return (
     <div className="col-span-3">
       <div className="pt-4 px-8 pb-8">
+        <h1 className="text-3xl py-4 capitalize">how to Make</h1>
         {steps.map((each) => {
           return (
             <div
-              onClick={() => setFinished([...finished, steps.indexOf(each)])}
               key={steps.indexOf(each)}
               className={
                 finished.includes(steps.indexOf(each))
@@ -22,10 +22,25 @@ const DetailPage = ({ dish, onDetail }) => {
                   : "pb-4 cursor-pointer"
               }
             >
-              {each}
+              <p
+                onClick={() => {
+                  if (finished.includes(steps.indexOf(each))) {
+                    setFinished(() =>
+                      finished.filter((index) => index !== steps.indexOf(each))
+                    );
+                  } else setFinished([...finished, steps.indexOf(each)]);
+                }}
+              >
+                {each}
+              </p>
             </div>
           );
         })}
+        <div>
+          <a href={dish.sourceUrl} target="_blank" rel="noreferrer">
+            &copy;{dish.creditsText}
+          </a>
+        </div>
         <button
           className="customBorder mt-8 px-4 py-2"
           onClick={() => onDetail()}
