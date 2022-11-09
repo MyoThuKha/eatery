@@ -22,7 +22,7 @@ const ChoosenItem = ({ dish, detail, onDetail }) => {
   const displayList =
     !detail && ingredients.length > 8 ? ingredients.slice(0, 8) : ingredients;
 
-  const boxStyle = "listBox " + (detail ? "" : "h-80");
+  const boxStyle = "listBox w-48 " + (detail ? "" : "h-80");
 
   return (
     <div className="flex items-center justify-center">
