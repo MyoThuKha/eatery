@@ -4,6 +4,9 @@ import { dummyMenu } from "../data/dummyMenu";
 import NavBar from "../components/navBar";
 import ChoosenItem from "../components/choosen";
 import DetailPage from "../components/detail";
+import { useDispatch } from "react-redux";
+import { setData } from "../data/slice";
+import { useEffect } from "react";
 
 export const getStaticProps = async () => {
   const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=20&apiKey=${process.env.API_KEY}`;
@@ -16,6 +19,7 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ data }) {
+  const dispatch = useDispatch();
   const [recipes, setRecipes] = useState(data.results);
   const [curr, setCurr] = useState(0);
   const [detail, setDetail] = useState(false);
@@ -30,6 +34,10 @@ export default function Home({ data }) {
     setActiveBtn(id);
     changeRecipes(id);
   };
+
+  useEffect(() => {
+    dispatch(setData(data));
+  }, [data, dispatch]);
 
   const changeRecipes = (id) => {
     let result;

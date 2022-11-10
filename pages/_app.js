@@ -1,16 +1,17 @@
 import NavBar from "../components/navBar";
 import "../styles/globals.css";
 import { useState } from "react";
+import { Provider } from "react-redux";
+import store from "../data/store";
 
 function MyApp({ Component, pageProps }) {
-  const [page, setPage] = useState(1);
-
-  const changePage = (id) => setPage(id);
   return (
-    <div className="">
-      <NavBar changePage={changePage}></NavBar>
-      <Component {...pageProps} />
-    </div>
+    <Provider store={store}>
+      <div className="">
+        <NavBar></NavBar>
+        <Component {...pageProps} />
+      </div>
+    </Provider>
   );
 }
 
