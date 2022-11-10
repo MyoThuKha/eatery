@@ -20,6 +20,11 @@ export const getStaticProps = async () => {
 
 export default function Home({ data }) {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setData(data.results));
+  }, [data, dispatch]);
+
   const [recipes, setRecipes] = useState(data.results);
   const [curr, setCurr] = useState(0);
   const [detail, setDetail] = useState(false);
@@ -34,10 +39,6 @@ export default function Home({ data }) {
     setActiveBtn(id);
     changeRecipes(id);
   };
-
-  useEffect(() => {
-    dispatch(setData(data));
-  }, [data, dispatch]);
 
   const changeRecipes = (id) => {
     let result;
