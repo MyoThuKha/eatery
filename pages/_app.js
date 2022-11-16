@@ -1,6 +1,5 @@
 import NavBar from "../components/navBar";
 import "../styles/globals.css";
-import { useState } from "react";
 import { Provider } from "react-redux";
 import store from "../data/store";
 

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   data: {},
   filteredData: {},
+  curr: {},
 };
 
 const slice = createSlice({
@@ -14,6 +15,9 @@ const slice = createSlice({
     },
     setFiltered: (state, action) => {
       state.filteredData = action.payload;
+    },
+    setCurr: (state, action) => {
+      state.curr = action.payload;
     },
   },
 });

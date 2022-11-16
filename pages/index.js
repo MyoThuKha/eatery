@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
 import { dummyMenu } from "../data/dummyMenu";
-import NavBar from "../components/navBar";
 import ChoosenItem from "../components/choosen";
 import DetailPage from "../components/detail";
 import { useDispatch } from "react-redux";
@@ -55,7 +54,7 @@ export default function Home({ data }) {
   };
 
   return (
-    <main className="bodyHeight grid grid-cols-7">
+    <main className="relative bodyHeight grid grid-cols-7">
       <div className=" col-span-4 border-r border-black">
         <h1 className="text-8xl uppercase">
           Food

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import Image from "next/image";
 
 const DetailPage = ({ dish, onDetail }) => {
   const steps = useMemo(() => {
@@ -12,6 +13,9 @@ const DetailPage = ({ dish, onDetail }) => {
     <div className="col-span-3">
       <div className="pt-4 px-8 pb-8">
         <h1 className="text-3xl py-4 capitalize">how to Make</h1>
+        <div>
+          <Image src={dish.image} alt="" width={400} height={300} />
+        </div>
         {steps.map((each) => {
           return (
             <div

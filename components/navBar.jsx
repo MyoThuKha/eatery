@@ -3,11 +3,11 @@ import { useState, useMemo, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 const NavBar = () => {
-  const data = useSelector((state) => state.root.data);
-  const dispatch = useDispatch();
+  // const data = useSelector((state) => state.root.data);
+  // const dispatch = useDispatch();
 
   const [isSearch, setIsSearch] = useState(false);
-  const items = useMemo(() => data.map((each) => each.title), [data]);
+  // const items = useMemo(() => data.map((each) => each.title), [data]);
   const inputRef = useRef();
 
   return (

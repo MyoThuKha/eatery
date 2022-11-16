@@ -9,6 +9,14 @@ body {
   font-family: "Arial nova";
 }
 
+.bg-theme {
+  background-color: #f2eee9;
+}
+
+.h-custom {
+  min-height: 90vh;
+}
+
 .navHeight {
   height: 10vh;
 }
