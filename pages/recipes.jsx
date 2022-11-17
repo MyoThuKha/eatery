@@ -62,10 +62,10 @@ const Recipes = ({ data }) => {
     <div className="min-h-screen overflow-hidden grid grid-cols-3 p-8">
       <div className="col-span-2 w-5/6">
         {/* title */}
-        <div className=" h-60">
+        <div className="h-60">
           {/* dishtype */}
           <p className="text-lg">{dish.dishTypes.join(", ")}</p>
-          <h2 className="text-5xl pt-6 pb-10">{dish.title}</h2>
+          <h2 className="text-4xl pt-6 pb-10">{dish.title}</h2>
         </div>
         {/* ==title== */}
 

@@ -1,13 +1,18 @@
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const data = useSelector((state) => state.root.curr);
+  const [copied, setCopied] = useState(false);
 
-  const [isSearch, setIsSearch] = useState(false);
-  // const items = useMemo(() => data.map((each) => each.title), [data]);
-  const inputRef = useRef();
+  useEffect(() => {
+    if (copied === true) {
+      setTimeout(() => {
+        setCopied(false);
+      }, 1000);
+    }
+  }, [copied, setCopied]);
 
   return (
     <nav className="relative navHeight border-b border-black w-screen flex items-center justify-around">
@@ -20,30 +25,16 @@ const NavBar = () => {
       </div>
       {/* search */}
       <div>
-        {!isSearch && <button onClick={() => setIsSearch(true)}>Search</button>}
-        {isSearch && (
-          <div>
-            <input
-              className="customBorder rounded-full px-2 focus:outline-none"
-              value={inputRef.current}
-              onChange={(e) => (inputRef.current = e.target.value)}
-            />
-            <svg
-              onClick={() => setIsSearch(false)}
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 absolute right-8 top-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </div>
+        {copied && <p>Copied to Clipboard!</p>}
+        {!copied && (
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              setCopied(true);
+            }}
+          >
+            Share
+          </button>
         )}
       </div>
     </nav>
