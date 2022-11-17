@@ -6,7 +6,8 @@
 
 body {
   background-color: #f2eee9;
-  font-family: "Arial nova";
+  /* font-family: "Arial Nova"; */
+  font-family: sans-serif;
 }
 
 .bg-theme {

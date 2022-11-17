@@ -1,4 +1,4 @@
-import { menuData } from "../../data/menuData";
+// import { menuData } from "../../data/menuData";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
@@ -6,10 +6,10 @@ import { setCurr } from "../../data/slice";
 import Head from "next/head";
 
 export const getStaticPaths = async () => {
-  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=20&apiKey=${process.env.API_KEY}`;
-  const data = menuData;
-  // const res = await fetch(foods_api);
-  // const data = await res.json();
+  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`;
+  // const data = menuData;
+  const res = await fetch(foods_api);
+  const data = await res.json();
   const paths = data.results.map((each) => {
     return {
       params: {
@@ -24,11 +24,10 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async () => {
-  // https://api.spoonacular.com/recipes/{id}/information
-  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=20&apiKey=${process.env.API_KEY}`;
-  const data = menuData;
-  // const res = await fetch(foods_api);
-  // const data = await res.json();
+  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`;
+  // const data = menuData;
+  const res = await fetch(foods_api);
+  const data = await res.json();
   return {
     props: { data },
   };

@@ -1,17 +1,14 @@
 import Image from "next/image";
 import { useState } from "react";
-import { menuData } from "../data/menuData";
+// import { menuData } from "../data/menuData";
 import ChoosenItem from "../components/choosen";
-import DetailPage from "../components/detail";
-import { setData } from "../data/slice";
-import { useEffect } from "react";
 import Head from "next/head";
 
 export const getStaticProps = async () => {
   const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=20&apiKey=${process.env.API_KEY}`;
-  const data = menuData;
-  // const res = await fetch(foods_api);
-  // const data = await res.json();
+  // const data = menuData;
+  const res = await fetch(foods_api);
+  const data = await res.json();
   const filtered_data = data.results.filter(
     (each) => each.analyzedInstructions.length !== 0
   );
@@ -38,7 +35,7 @@ export default function Home({ data }) {
     const dataList = data;
     if (id === 1) result = data;
     if (id === 2) result = dataList.filter((each) => each.veryPopular === true);
-    if (id === 4) result = dataList.filter((each) => each.vegetarian === true);
+    if (id === 4) result = dataList.filter((each) => each.vegan === true);
     if (id === 3)
       result = dataList.filter(
         (each) => each.dishTypes.includes("dinner") === true
@@ -108,7 +105,7 @@ export default function Home({ data }) {
                   Dinner
                 </button>
                 <button className={dynamicBtn(4)} onClick={() => handleBtn(4)}>
-                  Vegetarian
+                  Vegan
                 </button>
               </div>
               <div className="col-span-1 font-bold flex justify-center items-center">

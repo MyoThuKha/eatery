@@ -41,8 +41,8 @@ const ChoosenItem = ({ dish }) => {
       <div>
         <h1 className="py-2 text-lg">Ingredients</h1>
         <div>
-          <div className="listBox w-48 h-80">
-            <h4 className="font-bold">{dish.title}</h4>
+          <div style={{ height: "21rem" }} className="listBox w-48">
+            <h4 className="font-bold pb-4">{dish.title}</h4>
             <ul className="list-disc">
               {displayList.map((each) => (
                 <li key={ingredients.indexOf(each)}>{each}</li>
