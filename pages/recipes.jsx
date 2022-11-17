@@ -1,10 +1,8 @@
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import ChoosenItem from "../components/choosen";
-import DetailPage from "../components/detail";
 import { dummyMenu } from "../data/dummyMenu";
-import { useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setCurr } from "../data/slice";
 
 export const getStaticProps = async () => {
   const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=20&apiKey=${process.env.API_KEY}`;
@@ -19,6 +17,11 @@ export const getStaticProps = async () => {
 const Recipes = ({ data }) => {
   const router = useRouter();
   const id = router.query.id;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setCurr(id));
+  }, [dispatch, id]);
 
   const recipes = data.results;
   const curr = useMemo(

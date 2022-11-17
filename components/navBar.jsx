@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { useState, useMemo, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
-  // const data = useSelector((state) => state.root.data);
-  // const dispatch = useDispatch();
+  const data = useSelector((state) => state.root.curr);
 
   const [isSearch, setIsSearch] = useState(false);
   // const items = useMemo(() => data.map((each) => each.title), [data]);
@@ -15,7 +14,7 @@ const NavBar = () => {
       <div className="text-2xl uppercase">recipes</div>
       <div className="flex w-1/3 justify-between text-gray-700">
         <Link href="/">Home</Link>
-        <Link href="/recipes">Recipes</Link>
+        <Link href={"/recipes?id=" + data}>Recipes</Link>
         <Link href="/features">Features</Link>
         <Link href="/contact">Contact</Link>
       </div>

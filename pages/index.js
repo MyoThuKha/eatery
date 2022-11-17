@@ -3,7 +3,6 @@ import { useState } from "react";
 import { dummyMenu } from "../data/dummyMenu";
 import ChoosenItem from "../components/choosen";
 import DetailPage from "../components/detail";
-import { useDispatch } from "react-redux";
 import { setData } from "../data/slice";
 import { useEffect } from "react";
 
@@ -18,12 +17,6 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ data }) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setData(data.results));
-  }, [data, dispatch]);
-
   const [recipes, setRecipes] = useState(data.results);
   const [curr, setCurr] = useState(0);
 
