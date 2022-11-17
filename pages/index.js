@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import { dummyMenu } from "../data/dummyMenu";
+import { menuData } from "../data/menuData";
 import ChoosenItem from "../components/choosen";
 import DetailPage from "../components/detail";
 import { setData } from "../data/slice";
@@ -9,7 +9,7 @@ import Head from "next/head";
 
 export const getStaticProps = async () => {
   const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=20&apiKey=${process.env.API_KEY}`;
-  const data = dummyMenu;
+  const data = menuData;
   // const res = await fetch(foods_api);
   // const data = await res.json();
   return {
@@ -18,7 +18,10 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ data }) {
-  const [recipes, setRecipes] = useState(data.results);
+  const filtered = data.results.filter(
+    (each) => each.analyzedInstructions.length !== 0
+  );
+  const [recipes, setRecipes] = useState(filtered);
   const [curr, setCurr] = useState(0);
 
   const [activeBtn, setActiveBtn] = useState(1);
@@ -110,8 +113,8 @@ export default function Home({ data }) {
               </div>
               <div className="col-span-1 font-bold flex justify-center items-center">
                 <div className="text-center">
-                  <p className="text-6xl">*</p>
-                  <p className="text-3xl py-4 ">{data.results.length}</p>
+                  <p className="text-4xl">*</p>
+                  <p className="text-5xl py-4 ">{recipes.length}</p>
                   <p className="text-2xl">Food Recipes</p>
                 </div>
               </div>
