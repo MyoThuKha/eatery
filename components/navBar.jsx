@@ -16,7 +16,9 @@ const NavBar = () => {
 
   return (
     <nav className="relative navHeight border-b border-black w-screen flex items-center justify-around">
-      <div className="text-2xl uppercase">recipes</div>
+      <Link href="/">
+        <div className="text-2xl uppercase cursor-pointer">recipes</div>
+      </Link>
       <div className="flex w-1/3 justify-between text-gray-700">
         <Link href="/">Home</Link>
         <Link href={"/recipes?id=" + data}>Recipes</Link>
