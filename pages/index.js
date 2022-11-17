@@ -12,16 +12,16 @@ export const getStaticProps = async () => {
   const data = menuData;
   // const res = await fetch(foods_api);
   // const data = await res.json();
+  const filtered_data = data.results.filter(
+    (each) => each.analyzedInstructions.length !== 0
+  );
   return {
-    props: { data },
+    props: { data: filtered_data },
   };
 };
 
 export default function Home({ data }) {
-  const filtered = data.results.filter(
-    (each) => each.analyzedInstructions.length !== 0
-  );
-  const [recipes, setRecipes] = useState(filtered);
+  const [recipes, setRecipes] = useState(data);
   const [curr, setCurr] = useState(0);
 
   const [activeBtn, setActiveBtn] = useState(1);
