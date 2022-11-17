@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import Image from "next/image";
-const ChoosenItem = ({ dish, detail, onDetail }) => {
+import Link from "next/link";
+const ChoosenItem = ({ dish }) => {
   // parsing data from api (can call directly from api but i have limited api call)
   const ingredients = useMemo(() => {
     let result = [];
@@ -20,9 +21,7 @@ const ChoosenItem = ({ dish, detail, onDetail }) => {
   //------------------------parsing-------------------------------//
 
   const displayList =
-    !detail && ingredients.length > 8 ? ingredients.slice(0, 8) : ingredients;
-
-  const boxStyle = "listBox w-48 " + (detail ? "" : "h-80");
+    ingredients.length > 8 ? ingredients.slice(0, 8) : ingredients;
 
   return (
     <div className="flex items-center justify-center">
@@ -42,21 +41,18 @@ const ChoosenItem = ({ dish, detail, onDetail }) => {
       <div>
         <h1 className="py-2 text-lg">Ingredients</h1>
         <div>
-          <div className={boxStyle}>
+          <div className="listBox w-48 h-80">
             <h4 className="font-bold">{dish.title}</h4>
             <ul className="list-disc">
               {displayList.map((each) => (
                 <li key={ingredients.indexOf(each)}>{each}</li>
               ))}
             </ul>
-            {!detail && (
-              <button
-                onClick={() => onDetail()}
-                className="py-4 absolute bottom-2 text-orange-300 underline"
-              >
+            <Link href={{ pathname: "/recipes", query: { id: dish.id } }}>
+              <a className="py-4 absolute bottom-2 text-orange-300 underline">
                 See More
-              </button>
-            )}
+              </a>
+            </Link>
           </div>
         </div>
       </div>
