@@ -21,7 +21,7 @@ const NavBar = () => {
       </Link>
       <div className="flex w-1/3 justify-between text-gray-700">
         <Link href="/">Home</Link>
-        <Link href={"/recipes?id=" + data}>Recipes</Link>
+        <Link href={"/recipes/" + data}>Recipes</Link>
         <Link href="/features">Features</Link>
         <Link href="/contact">Contact</Link>
       </div>
