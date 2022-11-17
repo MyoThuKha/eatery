@@ -98,7 +98,7 @@ const Recipes = ({ data }) => {
             {/* ==title== */}
 
             <h3 className="text-xl pb-8">Methods</h3>
-            <div className="h-96 pr-8 overflow-scroll">
+            <div className="max-h-96 pr-8 overflow-scroll">
               {steps.map((each) => {
                 return (
                   <div
@@ -112,6 +112,11 @@ const Recipes = ({ data }) => {
                   </div>
                 );
               })}
+            </div>
+            <div>
+              <a href={dish.sourceUrl} target={"_blank"} rel="noreferrer">
+                &copy; {dish.creditsText}
+              </a>
             </div>
           </div>
           {/* ==col1== */}

@@ -35,8 +35,8 @@ export default function Home({ data }) {
 
   const changeRecipes = (id) => {
     let result;
-    const dataList = data.results;
-    if (id === 1) result = data.results;
+    const dataList = data;
+    if (id === 1) result = data;
     if (id === 2) result = dataList.filter((each) => each.veryPopular === true);
     if (id === 4) result = dataList.filter((each) => each.vegetarian === true);
     if (id === 3)

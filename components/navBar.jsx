@@ -15,7 +15,7 @@ const NavBar = () => {
   }, [copied, setCopied]);
 
   return (
-    <nav className="relative navHeight border-b border-black w-screen flex items-center justify-around">
+    <nav className="navHeight border-b border-black w-screen flex items-center justify-around">
       <Link href="/">
         <div className="text-2xl uppercase cursor-pointer">recipes</div>
       </Link>
