@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
 };
 
 const Recipes = ({ data }) => {
-  const [curr, setCurr] = useState(3);
+  const [curr, setCurr] = useState(0);
   const recipes = data.results;
 
   const steps = useMemo(() => {
@@ -40,36 +40,39 @@ const Recipes = ({ data }) => {
     result = [...new Set(result)];
     return result;
   }, [recipes, curr]);
+
   return (
-    <div className="h-screen overflow-hidden grid grid-cols-3 p-8">
+    <div className="min-h-screen overflow-hidden grid grid-cols-3 p-8">
       <div className="col-span-2 w-5/6">
-        <div className="">
-          <div>
-            <p className="text-lg">
-              {recipes[curr].dishTypes.map((each) => {
-                return each;
-              })}
-            </p>
-            <h2 className="text-4xl pt-3 pb-10">{recipes[curr].title}</h2>
-          </div>
+        {/* title */}
+        <div className=" h-60">
+          {/* dishtype */}
+          <p className="text-lg">{recipes[curr].dishTypes.join(", ")}</p>
+          <h2 className="text-5xl pt-6 pb-10">{recipes[curr].title}</h2>
         </div>
+        {/* ==title== */}
+
         <h3 className="text-xl pb-8">Methods</h3>
-        <div className="h-2/3 overflow-scroll">
+        <div className="h-96 pr-8 overflow-scroll">
           {steps.map((each) => {
             return (
               <div className="flex items-center pb-6" key={steps.indexOf(each)}>
-                <p className="text-sm flip">Step {steps.indexOf(each) + 1}</p>
+                <p className=" text-xs flip">Step {steps.indexOf(each) + 1}</p>
                 <p className="pl-4">{each}</p>
               </div>
             );
           })}
         </div>
       </div>
+      {/* ==col1== */}
+
+      {/* col2 */}
       <div className="col-span-1 flex justify-center">
         <div>
-          <div className="listBox w-56 bg-white">
+          <div className="listBox py-4 w-56 bg-white">
+            {/* infos */}
             <div>
-              <div className="flex items-center">
+              <div className="flex items-center pb-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -87,7 +90,7 @@ const Recipes = ({ data }) => {
                 <p className="pl-4">{recipes[curr].readyInMinutes} minutes</p>
               </div>
 
-              <div className="flex items-center">
+              <div className="flex items-center pb-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -104,19 +107,22 @@ const Recipes = ({ data }) => {
                 </svg>
                 <p className="pl-4">{recipes[curr].servings} servings</p>
               </div>
+
+              <div className="flex items-center pb-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="w-5 h-5 text-gray-800"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Z" />
+                  <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z" />
+                </svg>
+                <p className="pl-4">{recipes[curr].healthScore} scores</p>
+              </div>
             </div>
-            <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                class="w-5 h-5 text-gray-800"
-                viewBox="0 0 16 16"
-              >
-                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Z" />
-                <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z" />
-              </svg>
-              <p className="pl-4">{recipes[curr].healthScore} scores</p>
-            </div>
+            {/* --info-- */}
+
             {/* ingredient */}
             <h4 className="text-xl pb-6 pt-4">Ingredients</h4>
             <ul className="list-disc">
