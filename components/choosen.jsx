@@ -48,8 +48,8 @@ const ChoosenItem = ({ dish }) => {
                 <li key={ingredients.indexOf(each)}>{each}</li>
               ))}
             </ul>
-            <Link href={{ pathname: "/recipes", query: { id: dish.id } }}>
-              <a className="py-4 absolute bottom-2 text-orange-300 underline">
+            <Link href={"/recipes/" + dish.id}>
+              <a className="pt-8 absolute bottom-2 text-orange-300 underline">
                 See More
               </a>
             </Link>
