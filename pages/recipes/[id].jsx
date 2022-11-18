@@ -1,16 +1,13 @@
-// import { menuData } from "../../data/menuData";
+import { menuData } from "../../data/menuData";
 import { useEffect, useMemo } from "react";
-import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { setCurr } from "../../data/slice";
 import Head from "next/head";
 
 export const getStaticPaths = async () => {
-  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`;
-  // const data = menuData;
-  const res = await fetch(foods_api);
-  const data = await res.json();
-  const paths = data.results.map((each) => {
+  const data = menuData;
+  const paths = data.map((each) => {
     return {
       params: {
         id: each.id.toString(),
@@ -23,35 +20,20 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async () => {
-  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`;
-  // const data = menuData;
-  const res = await fetch(foods_api);
-  const data = await res.json();
+export const getStaticProps = async (context) => {
+  const id = context.params.id;
+  const dish = menuData.filter((each) => each.id == id);
   return {
-    props: { data },
+    props: { dish: dish[0], id },
   };
 };
 
-const Recipes = ({ data }) => {
-  const router = useRouter();
-  const id = router.query.id;
-
+const Recipes = ({ dish, id }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setCurr(id));
   }, [dispatch, id]);
 
-  const recipes = data.results;
-  const curr = useMemo(
-    () => recipes.filter((each) => each.id == id),
-    [recipes, id]
-  );
-  const dish = curr[0];
-
-  // if (dish.analyzedInstructions.length === 0) {
-  //   console.log(true);
-  // }
   const steps = useMemo(() => {
     try {
       return dish.analyzedInstructions[0].steps.map((each) => {

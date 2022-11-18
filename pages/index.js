@@ -1,43 +1,49 @@
 import Image from "next/image";
 import { useState } from "react";
-// import { menuData } from "../data/menuData";
+import { menuData } from "../data/menuData";
 import ChoosenItem from "../components/choosen";
 import Head from "next/head";
 
 export const getStaticProps = async () => {
-  const foods_api = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=20&apiKey=${process.env.API_KEY}`;
-  // const data = menuData;
-  const res = await fetch(foods_api);
-  const data = await res.json();
-  const filtered_data = data.results.filter(
-    (each) => each.analyzedInstructions.length !== 0
-  );
+  const data = menuData;
+
+  const parsedData = data.map((each) => {
+    const instruct = each.analyzedInstructions.map((each) => {
+      console.log(each);
+      return each.steps.map((each2) => {
+        return { step: each2.step, ingredients: each2.ingredients };
+      });
+    });
+    return {
+      id: each.id,
+      title: each.title,
+      image: each.image,
+      veryPopular: each.veryPopular,
+      vegan: each.vegan,
+      dishTypes: each.dishTypes,
+      analyzedInstructions: instruct,
+    };
+  });
   return {
-    props: { data: filtered_data },
+    props: { data: parsedData },
   };
 };
 
 export default function Home({ data }) {
+  console.log(data.analyzedInstructions);
   const [recipes, setRecipes] = useState(data);
   const [curr, setCurr] = useState(0);
 
   const [activeBtn, setActiveBtn] = useState(1);
-
   const dynamicBtn = (id) => (activeBtn === id ? "active-btn" : "btn");
-
   const handleBtn = (id) => {
     setActiveBtn(id);
-    changeRecipes(id);
-  };
-
-  const changeRecipes = (id) => {
     let result;
-    const dataList = data;
     if (id === 1) result = data;
-    if (id === 2) result = dataList.filter((each) => each.veryPopular === true);
-    if (id === 4) result = dataList.filter((each) => each.vegan === true);
+    if (id === 2) result = data.filter((each) => each.veryPopular === true);
+    if (id === 4) result = data.filter((each) => each.vegan === true);
     if (id === 3)
-      result = dataList.filter(
+      result = data.filter(
         (each) => each.dishTypes.includes("dinner") === true
       );
     setCurr(0);
@@ -56,7 +62,12 @@ export default function Home({ data }) {
             <br />
             Recipes
           </h1>
-          <ChoosenItem dish={recipes[curr]} />
+          {/* <ChoosenItem
+            dish={recipes[curr].analyzedInstructions}
+            image={recipes[curr].image}
+            title={recipes[curr].title}
+            id={recipes[curr].id}
+          /> */}
         </div>
 
         <div className="col-span-3">

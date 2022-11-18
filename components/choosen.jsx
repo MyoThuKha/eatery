@@ -1,19 +1,14 @@
 import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-const ChoosenItem = ({ dish }) => {
-  // parsing data from api (can call directly from api but i have limited api call)
+const ChoosenItem = ({ dish, image, title, id }) => {
   const ingredients = useMemo(() => {
     let result = [];
-    try {
-      dish.analyzedInstructions[0].steps.map((step) => {
-        step.ingredients.map((each) => {
-          result.push(each.name);
-        });
+    dish[0].steps.map((step) => {
+      step.ingredients.map((each) => {
+        result.push(each.name);
       });
-    } catch (e) {
-      result.push("no data");
-    }
+    });
     //removing duplicate items
     result = [...new Set(result)];
     return result;
@@ -26,14 +21,9 @@ const ChoosenItem = ({ dish }) => {
   return (
     <div className="flex items-center justify-center">
       <div className="bgImage flex justify-center items-center">
-        <a href={dish.image} target="_blank" rel="noreferrer">
+        <a href={image} target="_blank" rel="noreferrer">
           <div className="relative rounded-full overflow-hidden w-48 h-48">
-            <Image
-              src={dish.image}
-              alt={dish.title}
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={image} alt={title} layout="fill" objectFit="cover" />
           </div>
         </a>
       </div>
@@ -42,13 +32,13 @@ const ChoosenItem = ({ dish }) => {
         <h1 className="py-2 text-lg">Ingredients</h1>
         <div>
           <div style={{ height: "21rem" }} className="listBox w-48">
-            <h4 className="font-bold pb-4">{dish.title}</h4>
+            <h4 className="font-bold pb-4">{title}</h4>
             <ul className="list-disc">
               {displayList.map((each) => (
                 <li key={ingredients.indexOf(each)}>{each}</li>
               ))}
             </ul>
-            <Link href={"/recipes/" + dish.id}>
+            <Link href={"/recipes/" + id}>
               <a className="pt-8 absolute bottom-2 text-orange-300 underline">
                 See More
               </a>
