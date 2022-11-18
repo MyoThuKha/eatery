@@ -1,4 +1,5 @@
 import Head from "next/head";
+import CreditButton from "../components/button";
 
 const Contact = () => {
   return (
@@ -41,6 +42,15 @@ const Contact = () => {
                 myothukha.dev@gmail.com
               </a>
             </div>
+            <div className="text-lg">
+              <a
+                href="https://github.com/MyoThuKha"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Github
+              </a>
+            </div>
           </div>
         </div>
         <div className="col-span-4 relative flex justify-center items-center">
@@ -53,31 +63,14 @@ const Contact = () => {
               You can check out the UI that i used
               <br /> to create this website at here
             </p>
-            <div className="my-6 py-1 px-2 listBox">
-              <a
-                href="https://dribbble.com/shots/17282667-Food-Recipe-Landing?utm_source=Clipboard_Shot&utm_campaign=Izmahsa&utm_content=Food%20Recipe%20Landing&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=Izmahsa&utm_content=Food%20Recipe%20Landing&utm_medium=Social_Share"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div className="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                    />
-                  </svg>
-                  <p className="px-2">Reference UI</p>
-                </div>
-              </a>
-            </div>
+            <CreditButton
+              url="https://dribbble.com/shots/17282667-Food-Recipe-Landing?utm_source=Clipboard_Shot&utm_campaign=Izmahsa&utm_content=Food%20Recipe%20Landing&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=Izmahsa&utm_content=Food%20Recipe%20Landing&utm_medium=Social_Share"
+              text="home ui"
+            />
+            <CreditButton
+              url="https://dribbble.com/shots/9004067-Recipe-Website?utm_source=Clipboard_Shot&utm_campaign=colinstewart&utm_content=Recipe%20Website&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=colinstewart&utm_content=Recipe%20Website&utm_medium=Social_Share"
+              text="recipes ui"
+            />
           </div>
         </div>
       </div>
