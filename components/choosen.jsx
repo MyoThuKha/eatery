@@ -1,19 +1,18 @@
 import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-const ChoosenItem = ({ dish, image, title, id }) => {
+const ChoosenItem = ({ instructions, image, title, id }) => {
   const ingredients = useMemo(() => {
     let result = [];
-    dish[0].steps.map((step) => {
-      step.ingredients.map((each) => {
-        result.push(each.name);
+    instructions.map((each) => {
+      each.ingredients.map((each) => {
+        result.push(each);
       });
     });
     //removing duplicate items
     result = [...new Set(result)];
     return result;
-  }, [dish]);
-  //------------------------parsing-------------------------------//
+  }, [instructions]);
 
   const displayList =
     ingredients.length > 8 ? ingredients.slice(0, 8) : ingredients;

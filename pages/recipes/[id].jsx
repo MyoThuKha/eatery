@@ -1,13 +1,11 @@
-import { menuData } from "../../data/menuData";
 import { useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 import { setCurr } from "../../data/slice";
 import Head from "next/head";
+import { menu } from "../../data/menu";
 
 export const getStaticPaths = async () => {
-  const data = menuData;
-  const paths = data.map((each) => {
+  const paths = menu.map((each) => {
     return {
       params: {
         id: each.id.toString(),
@@ -22,7 +20,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const dish = menuData.filter((each) => each.id == id);
+  const dish = menu.filter((each) => each.id == id);
   return {
     props: { dish: dish[0], id },
   };
@@ -35,26 +33,18 @@ const Recipes = ({ dish, id }) => {
   }, [dispatch, id]);
 
   const steps = useMemo(() => {
-    try {
-      return dish.analyzedInstructions[0].steps.map((each) => {
-        return each.step;
-      });
-    } catch (e) {
-      return [];
-    }
+    return dish.analyzedInstructions.map((each) => {
+      return each.step;
+    });
   }, [dish]);
 
   const ingredients = useMemo(() => {
     let result = [];
-    try {
-      dish.analyzedInstructions[0].steps.map((step) => {
-        step.ingredients.map((each) => {
-          result.push(each.name);
-        });
+    dish.analyzedInstructions.map((each) => {
+      each.ingredients.map((each) => {
+        result.push(each);
       });
-    } catch (e) {
-      result.push("no data");
-    }
+    });
     //removing duplicate items
     result = [...new Set(result)];
     return result;

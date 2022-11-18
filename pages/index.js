@@ -1,19 +1,11 @@
 import Image from "next/image";
 import { useState } from "react";
-import { menuData } from "../data/menuData";
+import { menu } from "../data/menu";
 import ChoosenItem from "../components/choosen";
 import Head from "next/head";
 
 export const getStaticProps = async () => {
-  const data = menuData;
-
-  const parsedData = data.map((each) => {
-    const instruct = each.analyzedInstructions.map((each) => {
-      console.log(each);
-      return each.steps.map((each2) => {
-        return { step: each2.step, ingredients: each2.ingredients };
-      });
-    });
+  const parsedData = menu.map((each) => {
     return {
       id: each.id,
       title: each.title,
@@ -21,7 +13,7 @@ export const getStaticProps = async () => {
       veryPopular: each.veryPopular,
       vegan: each.vegan,
       dishTypes: each.dishTypes,
-      analyzedInstructions: instruct,
+      analyzedInstructions: each.analyzedInstructions,
     };
   });
   return {
@@ -30,7 +22,6 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ data }) {
-  console.log(data.analyzedInstructions);
   const [recipes, setRecipes] = useState(data);
   const [curr, setCurr] = useState(0);
 
@@ -62,12 +53,12 @@ export default function Home({ data }) {
             <br />
             Recipes
           </h1>
-          {/* <ChoosenItem
-            dish={recipes[curr].analyzedInstructions}
+          <ChoosenItem
+            instructions={recipes[curr].analyzedInstructions}
             image={recipes[curr].image}
             title={recipes[curr].title}
             id={recipes[curr].id}
-          /> */}
+          />
         </div>
 
         <div className="col-span-3">
